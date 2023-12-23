@@ -6,8 +6,8 @@ const app = express()
 
 const sources = [
     {
-        name: 'budget bytes',
-        address: 'https://www.budgetbytes.com/category/recipes/one-pot/',
+        name: '',
+        address: '',
     },
 ]
 
@@ -15,7 +15,7 @@ const recipes = [
 ]
 
 // sources.forEach(source => {
-    axios.get("https://www.budgetbytes.com/category/recipes/one-pot/")
+    axios.get(sources[0].address)
      .then(response => {
         const html = response.data
         const $ = cheerio.load(html)
