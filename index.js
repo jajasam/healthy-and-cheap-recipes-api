@@ -19,17 +19,38 @@ const recipes = [
      .then(response => {
         const html = response.data
         const $ = cheerio.load(html)
+        let url, img, title, cost, desc;
 
-        // $('a:contains("climate")', html).each(function () {
-        //     const title = $(this).text()
-        //     const url = $(this).attr('href')
+        $('.post-summary').each(function () {
+            $(this).find('a').each(function () {
+                url = $(this).attr('href');
+                console.log(url)
+            });
+        
+            $(this).find('img').each(function () {
+                img = $(this).attr('src');
+            });
+    
+            $(this).find('.post-summary__title').each(function () {
+                title = $(this).text();
+            });
+        
+            $(this).find('.cost-per').each(function () {
+                cost = $(this).text();
+            });
 
-        //     recipes.push({
-        //         title,
-        //         url: newspaper.base + url,
-        //         source: newspaper.name
-        //     })
-        // })
+            $(this).find('p').each(function () {
+                desc = $(this).text()
+            })
+
+            recipes.push({
+                url,
+                img,
+                title,
+                cost,
+                desc
+            })
+        })
     })
      .catch(error => {
          console.error('Error fetching data:', error);
